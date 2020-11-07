@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Library!
+{% endblock %}
+
+{% block body %}
+  <header>
+    {% if user %}
+      <a href="/logout">Logout</a>
+    {% endif %}
+  </header>
+  <h1>
+    Home Page
+  </h1>
+{% endblock %}
