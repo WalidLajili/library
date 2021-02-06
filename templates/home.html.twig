@@ -4,13 +4,79 @@
   Library!
 {% endblock %}
 
+{% block stylesheets %}
+  {{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+
 {% block body %}
-  <header>
-    {% if user %}
-      <a href="/logout">Logout</a>
-    {% endif %}
-  </header>
+  <div id="home-category-select" class="mdc-select mdc-select--outlined home-category-select">
+    <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
+      <span class="mdc-notched-outline">
+        <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+          <span id="outlined-select-label" class="mdc-floating-label">
+            Category
+          </span>
+        </span>
+        <span class="mdc-notched-outline__trailing"></span>
+      </span>
+      <span class="mdc-select__selected-text-container">
+        <span class="mdc-select__selected-text"></span>
+      </span>
+      <span class="mdc-select__dropdown-icon">
+        <svg 
+          class="mdc-select__dropdown-icon-graphic"
+          viewBox="7 10 10 5"
+          focusable="false">
+            <polygon class="mdc-select__dropdown-icon-inactive"
+              stroke="none"
+              fill-rule="evenodd"
+              points="7 10 12 15 17 10"></polygon>
+            <polygon class="mdc-select__dropdown-icon-active"
+              stroke="none"
+              fill-rule="evenodd"
+              points="7 15 12 10 17 15"></polygon>
+            </svg>
+          </span>
+        </div>
+        <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+          <div class="mdc-list" role="listbox" >
+            {% for category in categories %}
+              <a href="/category/{{category.id}}" class="mdc-list-item"
+                data-value="{{ category.id }}"
+                role="option">
+                  <span class="mdc-list-item__ripple"></span>
+                  <span class="mdc-list-item__text">{{ category.title }}</span>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+  <input value="{{selectedCategory ? selectedCategory.id : ""}}" name="category" class="hidden" />
   <h1>
-    Home Page
+    Online libraray
   </h1>
+  <p>
+    Unlimited access to books
+  </p>
+
+  {% if books|length == 0 %} 
+    <p class="no-books" >Sorry no books found our admins will add some soon stay patient!</p>
+  {% else %}
+
+  <div class="books" >
+  {% for book in books %}
+     <a href="/book/{{book.id}}" class="book">
+      <img class="book-cover" src="{{ asset('uploads/' ~ book.cover) }}" />
+    </a>
+  {% endfor %}
+  <div>
+
+
+{% endif %}
+
+{% endblock %}
+{% block javascripts %}
+  {{ encore_entry_script_tags('home') }}
 {% endblock %}

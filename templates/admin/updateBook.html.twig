@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Library!
+{% endblock %}
+
+{% block stylesheets %}
+  {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+  <div class="return-container">
+    <a href="/admin/book" class="mdc-button mdc-button--raised">
+      <span class="mdc-button__label">Return</span>
+    </a>
+
+    <button id="delete-button" class="mdc-button mdc-button--raised">
+      <span class="mdc-button__label">Delete</span>
+    </button>
+  </div>
+  <h1>
+    Update Book
+  </h1>
+  <p>
+    Book added users will see in home page and they will be able to download
+  </p>
+
+  <form enctype="multipart/form-data" method="post" class="form-grid">
+    <div class="inputs">
+      <label class="mdc-text-field mdc-text-field--outlined left">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label">Title</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input value="{{ book.title }}"
+          required
+          name="title"
+          type="text"
+          class="mdc-text-field__input" />
+      </label>
+      <label class="mdc-text-field mdc-text-field--outlined left">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label">Author</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input value="{{ book.author }}"
+          required
+          name="author"
+          type="text"
+          class="mdc-text-field__input" />
+      </label>
+
+      <div id="category-select" class="mdc-select mdc-select--outlined left">
+        <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
+          <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+              <span id="outlined-select-label" class="mdc-floating-label">
+                Category
+              </span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+          </span>
+          <span class="mdc-select__selected-text-container">
+            <span id="demo-selected-text" class="mdc-select__selected-text">
+
+            </span>
+          </span>
+          <span class="mdc-select__dropdown-icon">
+            <svg class="mdc-select__dropdown-icon-graphic"
+              viewBox="7 10 10 5"
+              focusable="false">
+              <polygon class="mdc-select__dropdown-icon-inactive"
+                stroke="none"
+                fill-rule="evenodd"
+                points="7 10 12 15 17 10"></polygon>
+              <polygon class="mdc-select__dropdown-icon-active"
+                stroke="none"
+                fill-rule="evenodd"
+                points="7 15 12 10 17 15"></polygon>
+            </svg>
+          </span>
+        </div>
+        <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+          <ul class="mdc-list" role="listbox" aria-label="Food picker listbox">
+            {% for category in categories %}
+              <li class="mdc-list-item"
+                aria-selected="false"
+                data-value="{{ category.id }}"
+                role="option">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="mdc-list-item__text">{{ category.title }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <input value="{{ book.category.id }}"
+        required
+        class="hidden"
+        name="category" />
+      <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea left">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label" id="my-label-id">Description</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+
+        <textarea required
+          name="description"
+          class="mdc-text-field__input"
+          rows="6"
+          cols="40">{{ book.description }}</textarea>
+      </label>
+      <div class="left flex-column">
+        <label class="upload-label">Content* (Accept pdf format)</label>
+        <button type="button" id="book-url-upload" class="upload-wrapper left">
+          <a download
+            href="{{ asset('uploads/' ~ book.url) }}"
+            class="upload-pdf-update"
+            id="upload-pdf">
+            {{ book.url }}
+          </a>
+          <input accept="application/pdf,application/x-pdf"
+            type="file"
+            name="url"
+            class="hidden" />
+        </button>
+      </div>
+
+      <div class="image-upload-wrapper right">
+        <label class="upload-label">Cover* (Accept any image format)</label>
+        <button id="book-image-upload" type="button" class="upload-wrapper image-upload-content">
+          <img src="{{ asset('uploads/' ~ book.cover) }}"
+            id="upload-image"
+            class="upload-image" />
+          <input accept="image/*" type="file" name="cover" class="hidden" />
+        </button>
+      </div>
+    </div>
+
+    <button class="mdc-button mdc-button--raised submit-button">
+      <span class="mdc-button__label">Update Book</span>
+    </button>
+  </form>
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('admin') }}
+{% endblock %}

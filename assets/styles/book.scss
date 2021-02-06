@@ -1,0 +1,41 @@
+p {
+  color: #212121;
+}
+
+.details {
+  display: flex;
+  padding: 20px;
+  align-items: stretch;
+  align-self: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+.image {
+  padding-right: 15px;
+  flex: 1 1 0%;
+}
+
+.description {
+  padding-left: 15px;
+  flex: 1 1 0%;
+}
+
+.category {
+  display: flex;
+  padding: 0 20px;
+  align-items: center;
+  align-self: center;
+  max-width: 800px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.category-text {
+  margin: 0;
+}
+
+.download {
+  position: absolute;
+  right: 20px;
+}

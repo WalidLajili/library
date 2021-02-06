@@ -6,9 +6,27 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+import './styles/app.scss';
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
+import { MDCMenu } from '@material/menu';
+import { MDCTextField } from '@material/textfield';
 
-console.log('Hello Webpack Encore! Edit me in assets/app.js');
+const userButton = document.getElementById('header-user');
+const menuItem = document.querySelector('.mdc-menu');
+
+if (menuItem) {
+  const menu = new MDCMenu(menuItem);
+
+  function openMenu() {
+    menu.setAbsolutePosition(window.innerWidth - 20, userButton.offsetTop + userButton.clientHeight);
+    menu.open = true;
+  }
+
+  userButton.addEventListener('mousedown', openMenu);
+}
+
+const inputs = document.querySelectorAll('.mdc-text-field');
+
+for (let i = 0; i < inputs.length; i += 1) {
+  const textField = new MDCTextField(inputs[i]);
+}

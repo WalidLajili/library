@@ -18,13 +18,13 @@ class History
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="histories")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="histories")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=book::class, inversedBy="yes")
+     * @ORM\ManyToOne(targetEntity=Book::class, inversedBy="histories")
      * @ORM\JoinColumn(nullable=false)
      */
     private $book;

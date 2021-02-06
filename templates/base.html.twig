@@ -2,21 +2,94 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Sriracha&display=swap"
+      rel="stylesheet" />
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+      rel="stylesheet" />
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
     <title>
       {% block title %}
         Welcome!
       {% endblock %}
     </title>
+    {{ encore_entry_link_tags('app') }}
     {% block stylesheets %}
-      {{ encore_entry_link_tags('app') }}
+
     {% endblock %}
   </head>
   <body>
-    {% block body %}
+    <div class="wrapper">
+      <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <a href="/">
+              <span class="mdc-top-app-bar__title">Online Library</span>
+            </a>
+          </section>
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"
+            role="toolbar">
+            {% if user %}
+              {% if 'admin' in user.roles %}
+                <a class="header-link" href="/admin/book">
+                  <span class="header-text">Books</span>
+                </a>
+                <a class="header-link" href="/admin/category">
+                  <span class="header-text">Category</span>
+                </a>
+              {% else %}
+                <a class="header-link" href="/history">
+                  <span class="header-text">History</span>
+                </a>
+              {% endif %}
+              <button class="header-link" id="header-user">
+                <span class="header-text">
+                  {{ user.firstName }} {{ user.lastName }}
+                </span>
+                <i class="material-icons mdc-button__icon" aria-hidden="true">
+                  more_vert
+                </i>
+              </button>
+              <div class="mdc-menu mdc-menu-surface">
+                <ul class="mdc-list"
+                  role="menu"
+                  aria-hidden="true"
+                  aria-orientation="vertical"
+                  tabindex="-1">
+                  <li class="mdc-list-item" role="menuitem">
+                    <a href="/profile">
+                      <span class="mdc-list-item__ripple"></span>
+                      <span class="mdc-list-item__text">Profile</span>
+                    </a>
+                  </li>
+                  <li class="mdc-list-item" role="menuitem">
+                    <a href="/logout">
+                      <span class="mdc-list-item__ripple"></span>
+                      <span class="mdc-list-item__text">Logout</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            {% else %}
+              <a class="header-link" href="/login">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="mdc-list-item__text">Login</span>
+              </a>
+            {% endif %}
+          </section>
+        </div>
+      </header>
+      <div class="content">
+        {% block body %}
 
-    {% endblock %}
+        {% endblock %}
+      </div>
+    </div>
+    {{ encore_entry_script_tags('app') }}
     {% block javascripts %}
-      {{ encore_entry_script_tags('app') }}
+
     {% endblock %}
   </body>
 </html>

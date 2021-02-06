@@ -25,7 +25,7 @@ class Book
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2054)
      */
     private $description;
 
@@ -35,7 +35,7 @@ class Book
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity=category::class, inversedBy="books")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="books")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -53,11 +53,11 @@ class Book
     /**
      * @ORM\OneToMany(targetEntity=History::class, mappedBy="book", orphanRemoval=true)
      */
-    private $yes;
+    private $histories;
 
     public function __construct()
     {
-        $this->yes = new ArrayCollection();
+        $this->histories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,27 +140,27 @@ class Book
     /**
      * @return Collection|History[]
      */
-    public function getYes(): Collection
+    public function getHistories(): Collection
     {
-        return $this->yes;
+        return $this->histories;
     }
 
-    public function addYe(History $ye): self
+    public function addHistories(History $history): self
     {
-        if (!$this->yes->contains($ye)) {
-            $this->yes[] = $ye;
-            $ye->setBook($this);
+        if (!$this->histories->contains($history)) {
+            $this->histories[] = $history;
+            $history->setBook($this);
         }
 
         return $this;
     }
 
-    public function removeYe(History $ye): self
+    public function removeYe(History $history): self
     {
-        if ($this->yes->removeElement($ye)) {
+        if ($this->histories->removeElement($history)) {
             // set the owning side to null (unless already changed)
-            if ($ye->getBook() === $this) {
-                $ye->setBook(null);
+            if ($history->getBook() === $this) {
+                $history->setBook(null);
             }
         }
 

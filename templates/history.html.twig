@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Library!
+{% endblock %}
+
+{% block stylesheets %}
+  {{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+
+{% block body %}
+  <h1>
+    Your history
+  </h1>
+  <p>
+    Check what book u already downloaded
+  </p>
+  <div class="books" >
+  {% for history in histories %}
+     <a href="/book/{{history.book.id}}" class="book">
+      <img class="book-cover" src="{{ asset('uploads/' ~ history.book.cover) }}" />
+    </a>
+  {% endfor %}
+  <div>
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('home') }}
+{% endblock %}

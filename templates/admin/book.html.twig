@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %} {% block title %}
+  Library!
+{% endblock %} {% block stylesheets %}
+  {{ encore_entry_link_tags('admin') }}
+{% endblock %} {% block body %}
+  <div class="add-container">
+    <a href="/admin/book/add" class="mdc-button mdc-button--raised">
+      <span class="mdc-button__label">Add book</span>
+    </a>
+  </div>
+  <div class="mdc-data-table">
+    <div class="mdc-data-table__table-container">
+      <table class="mdc-data-table__table">
+        <thead>
+          <tr class="mdc-data-table__header-row">
+            <th class="mdc-data-table__header-cell">
+              Title
+            </th>
+            <th class="mdc-data-table__header-cell" scope="col">
+              Author
+            </th>
+            <th class="mdc-data-table__header-cell" scope="col">
+              Category
+            </th>
+          </tr>
+        </thead>
+        <tbody class="mdc-data-table__content">
+          {% for book in books %}
+            <tr onclick="window.location.pathname='/admin/book/{{ book.id }}'"
+              class="mdc-data-table__row">
+              <td class="mdc-data-table__cell">
+                {{ book.title }}
+              </td>
+              <td class="mdc-data-table__cell">
+                {{ book.author }}
+              </td>
+              <td class="mdc-data-table__cell">
+                {{ book.category.title }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

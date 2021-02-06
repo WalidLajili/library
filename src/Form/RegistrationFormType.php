@@ -21,8 +21,8 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => ['placeholder' => 'email@address.com'],
             ])
-            ->add('firstName', TextType::class, ['label' => 'First name'])
-            ->add('lastName', TextType::class, ['label' => 'Last name'])
+            ->add('firstName', TextType::class, ['label' => false])
+            ->add('lastName', TextType::class, ['label' => false])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

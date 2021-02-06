@@ -5,32 +5,72 @@
 {% endblock %}
 
 {% block body %}
-  <form method="post">
-    <h1 class="h3 mb-3 font-weight-normal">
-      Please sign in
-    </h1>
-    <label for="inputEmail">Email</label>
-    <input type="email"
-      name="email"
-      id="inputEmail"
-      class="form-control"
-      required
-      autofocus />
-    <label for="inputPassword">Password</label>
-    <input type="password"
-      name="password"
-      id="inputPassword"
-      class="form-control"
-      required />
+  <h1 class="h3 mb-3 font-weight-normal">
+    Sign In
+  </h1>
+  <p>
+    Sing in to get free unlimited access
+  </p>
 
-    <input type="hidden"
-      name="_csrf_token"
-      value="{{ csrf_token('authenticate') }}" />
+  <form class="form-grid" method="post">
+    <div class="inputs">
+      <label class="mdc-text-field mdc-text-field--outlined full">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label">Email</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input required
+          name="email"
+          type="text"
+          class="mdc-text-field__input" />
+      </label>
 
-    <div class="checkbox mb-3">
-      <label><input type="checkbox" name="_remember_me" />Remember me</label>
+      <label class="mdc-text-field mdc-text-field--outlined full">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label">Password</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input required
+          name="password"
+          type="password"
+          class="mdc-text-field__input" />
+      </label>
+
+      <input type="hidden"
+        name="_csrf_token"
+        value="{{ csrf_token('authenticate') }}" />
+      <div class="mdc-form-field login-remember-me full">
+        <div class="mdc-checkbox">
+          <input id="remember-me"
+            type="checkbox"
+            name="_remember_me"
+            class="mdc-checkbox__native-control" />
+          <div class="mdc-checkbox__background">
+            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+              <path class="mdc-checkbox__checkmark-path"
+                fill="none"
+                d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
+          </div>
+          <div class="mdc-checkbox__ripple"></div>
+        </div>
+        <label class="login-remember-me-label" for="remember-me">
+          Remember me
+        </label>
+      </div>
+      <a class="login-link full" href="/register">
+        Dont have an account regsiter?
+      </a>
     </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+    <button class="mdc-button mdc-button--raised submit">
+      <span class="mdc-button__label">Sign In</span>
+    </button>
   </form>
 {% endblock %}

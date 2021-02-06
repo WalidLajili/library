@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Library!
+{% endblock %}
+
+{% block stylesheets %}
+  {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block body %}
+  <h1>
+    Profile
+  </h1>
+  <p>
+    Feel free to update your persnal information
+  </p>
+
+  <form method="post" class="form-grid">
+    <div class="inputs">
+      <label class="mdc-text-field mdc-text-field--outlined left">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label">First name</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input required
+          name="firstName"
+          value="{{ user.firstName }}"
+          type="text"
+          class="mdc-text-field__input" />
+      </label>
+      <label class="mdc-text-field mdc-text-field--outlined right">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label">Last name</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input required
+          name="lastName"
+          value="{{ user.lastName }}"
+          type="text"
+          class="mdc-text-field__input" />
+      </label>
+
+      <label class="mdc-text-field mdc-text-field--outlined full">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label">Email</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input required
+          name="email"
+          value="{{ user.email }}"
+          type="text"
+          class="mdc-text-field__input" />
+      </label>
+      <label class="mdc-text-field mdc-text-field--outlined left">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label">Current Password</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input name="password" type="password" class="mdc-text-field__input" />
+      </label>
+      <label class="mdc-text-field mdc-text-field--outlined right">
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label">New Password</span>
+          </span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input name="newPassword"
+          type="password"
+          class="mdc-text-field__input" />
+      </label>
+      {% if error %}
+        <div class="error full">
+          {{ error }}
+        </div>
+      {% endif %}
+    </div>
+    <button class="mdc-button mdc-button--raised submit-button">
+      <span class="mdc-button__label">Save updates</span>
+    </button>
+  </form>
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('profile') }}
+{% endblock %}

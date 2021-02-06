@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Library!
+{% endblock %}
+
+{% block stylesheets %}
+  {{ encore_entry_link_tags('book') }}
+{% endblock %}
+
+{% block body %}
+  <h1>
+    {{ book.title }} by {{ book.author }}
+  </h1>
+
+  <div class="category">
+    <p class="category-text">
+      Category: {{ book.category.title }}
+    </p>
+  </div>
+
+  {% if user %}
+    {% if 'admin' in user.roles %}
+      <a href="/admin/book/{{ book.id }}"
+        class="mdc-button mdc-button--raised download">
+        <span class="mdc-button__label">Update</span>
+      </a>
+    {% else %}
+      <a href="{{ asset('uploads/' ~ book.url) }}"
+        id="book-download-link"
+        download
+        class="mdc-button mdc-button--raised download">
+        <span class="mdc-button__label">Download</span>
+        <i class="material-icons mdc-button__icon" aria-hidden="true">
+          download
+        </i>
+      </a>
+    {% endif %}
+  {% else %}
+    <button id="book-download" class="mdc-button mdc-button--raised download">
+      <span class="mdc-button__label">Download</span>
+      <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
+    </button>
+  {% endif %}
+
+  <div class="details">
+    <img class="image" src="{{ asset('uploads/' ~ book.cover) }}" />
+    <p class="description">
+      {{ book.description }}
+    </p>
+  </div>
+
+  <div class="mdc-dialog">
+    <div class="mdc-dialog__container">
+      <div class="mdc-dialog__surface"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="my-dialog-title"
+        aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__content" id="my-dialog-content">
+          In order to download u must have an account
+        </div>
+        <div class="mdc-dialog__actions">
+          <a href="/login" class="mdc-button mdc-dialog__button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">Login</span>
+          </a>
+          <a href="/register" class="mdc-button mdc-dialog__button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">Register</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('book') }}
+{% endblock %}
